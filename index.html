@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>10-Ton Overhead Crane Troubleshooting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #0077cc;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #005fa3;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(0, 119, 204, 0.2);
+    }
+
+    .start-btn {
+      background-color: #28a745;
+    }
+
+    .start-btn:hover {
+      background-color: #218838;
+    }
+
+    #troubleshootingContainer {
+      display: none;
+      margin-top: 25px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* About & Help Button */
+    .about-help-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #6c757d;
+      color: #fff;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 50px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    .about-help-btn:hover {
+      background-color: #5a6268;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal-content img {
+      max-width: 90px;
+      margin-bottom: 15px;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #0077cc;
+    }
+
+    .modal-content p {
+      margin: 10px 0;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .modal-content button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal-content button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 10-Ton Overhead Crane</h1>
+    <button class="btn start-btn" onclick="showTroubleshooting()">Start Troubleshooting</button>
+
+    <div id="troubleshootingContainer">
+      <h2>What issue are you experiencing?</h2>
+      <button class="btn" onclick="location.href='power_failure.html'">⚡ Crane Not Working</button>
+      <button class="btn" onclick="location.href='abnormal_noise.html'">🔊 Abnormal Noise</button>
+      <button class="btn" onclick="location.href='overheating.html'">🌡️ Overheating</button>
+      <button class="btn" onclick="location.href='hook_drifting.html'">🎣 Hook Drifting</button>
+      <button class="btn" onclick="location.href='limit_switch.html'">⛔ Limit Switch Issue</button>
+      <button class="btn" onclick="location.href='control_system.html'">🖥️ Control System Issues</button>
+      <button class="btn" onclick="location.href='brake_problems.html'">🛑 Brake Problems</button>
+    </div>
+  </div>
+
+  <!-- About & Help Button -->
+  <button class="about-help-btn" onclick="toggleModal(true)">❓ About & Help</button>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <img src="ari-logo-90.png" alt="Automotive Robotics India Pvt. Ltd. Logo" />
+      <h2>About This Troubleshooting Tool</h2>
+      <p>This interactive guide helps crane operators troubleshoot issues with the 10-ton overhead crane efficiently.</p>
+      <p><strong>Created by:</strong> Automotive Robotics India Pvt. Ltd.</p>
+      <p><strong>Contact Automotive Robotics India Pvt. Ltd.</strong> for help or technical assistance.</p>
+      <button onclick="toggleModal(false)">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function showTroubleshooting() {
+      document.getElementById('troubleshootingContainer').style.display = 'block';
+    }
+
+    function toggleModal(show) {
+      const modal = document.getElementById("modalOverlay");
+      modal.style.display = show ? "block" : "none";
+    }
+  </script>
+</body>
+</html>

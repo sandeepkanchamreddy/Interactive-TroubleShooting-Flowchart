@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power Failure - Troubleshooting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      color: #cc0000;
+    }
+    .question {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .options {
+      margin-top: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #0077cc;
+      color: white;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .response {
+      margin-top: 20px;
+      background: #e8f0fe;
+      padding: 15px;
+      border-left: 5px solid #0077cc;
+    }
+    .back-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #6c757d;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<h2>🔌 Power Failure - Troubleshooting</h2>
+
+<div id="troubleshooting">
+
+  <div class="question" id="q1">1. Is the main power supply to the crane turned ON?</div>
+  <div class="options">
+    <button onclick="handleAnswer(1, 'yes')">Yes</button>
+    <button onclick="handleAnswer(1, 'no')">No</button>
+  </div>
+
+  <div class="question" id="q2" style="display:none;">2. Are any circuit breakers or fuses tripped or blown?</div>
+  <div class="options" id="opt2" style="display:none;">
+    <button onclick="handleAnswer(2, 'yes')">Yes</button>
+    <button onclick="handleAnswer(2, 'no')">No</button>
+  </div>
+
+  <div class="question" id="q3" style="display:none;">3. Is the emergency stop button pressed or engaged?</div>
+  <div class="options" id="opt3" style="display:none;">
+    <button onclick="handleAnswer(3, 'yes')">Yes</button>
+    <button onclick="handleAnswer(3, 'no')">No</button>
+  </div>
+
+  <div class="question" id="q4" style="display:none;">4. Do you see any error indicators on the control panel?</div>
+  <div class="options" id="opt4" style="display:none;">
+    <button onclick="handleAnswer(4, 'yes')">Yes</button>
+    <button onclick="handleAnswer(4, 'no')">No</button>
+  </div>
+
+</div>
+
+<div id="response" class="response" style="display:none;"></div>
+
+<a class="back-btn" href="index.html">← Back to Troubleshooting Menu</a>
+
+<script>
+  function handleAnswer(step, answer) {
+    const response = document.getElementById("response");
+    response.style.display = "none";
+    response.innerHTML = "";
+
+    if (step === 1) {
+      if (answer === "yes") {
+        document.getElementById("q2").style.display = "block";
+        document.getElementById("opt2").style.display = "block";
+      } else {
+        response.innerHTML = "👉 Please turn on the main power supply and retry.";
+        response.style.display = "block";
+      }
+    } else if (step === 2) {
+      if (answer === "yes") {
+        response.innerHTML = "👉 Replace the blown fuse or reset the tripped breaker, then check again.";
+        response.style.display = "block";
+      } else {
+        document.getElementById("q3").style.display = "block";
+        document.getElementById("opt3").style.display = "block";
+      }
+    } else if (step === 3) {
+      if (answer === "yes") {
+        response.innerHTML = "👉 Release or reset the emergency stop and try starting the crane.";
+        response.style.display = "block";
+      } else {
+        document.getElementById("q4").style.display = "block";
+        document.getElementById("opt4").style.display = "block";
+      }
+    } else if (step === 4) {
+      if (answer === "yes") {
+        response.innerHTML = "👉 Refer to the crane manual or control panel guide for error code resolution.";
+      } else {
+        response.innerHTML = "❗ If all checks are fine and crane still doesn't power on, contact maintenance or a certified technician.";
+      }
+      response.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>

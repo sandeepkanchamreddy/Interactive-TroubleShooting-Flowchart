@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Limit Switch Issue - Troubleshooting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h2 {
+      color: #cc0000;
+    }
+    .question {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .options {
+      margin-top: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 22px;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #0077cc;
+      color: white;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .description {
+      background-color: #e8f0fe;
+      margin-top: 15px;
+      padding: 15px;
+      border-left: 5px solid #0077cc;
+      font-size: 16px;
+    }
+    .back-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #6c757d;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<h2>🛑 Limit Switch Issue - Troubleshooting</h2>
+
+<div id="troubleshooting">
+
+  <div class="question" id="q1">1. Is the crane movement stopping before reaching the end position?</div>
+  <div class="options" id="opt1">
+    <button onclick="handleAnswer(1, 'yes')">Yes</button>
+    <button onclick="handleAnswer(1, 'no')">No</button>
+  </div>
+  <div class="description" id="desc1" style="display:none;"></div>
+
+  <div class="question" id="q2" style="display:none;">2. Has the limit switch actuator or roller been physically damaged or misaligned?</div>
+  <div class="options" id="opt2" style="display:none;">
+    <button onclick="handleAnswer(2, 'yes')">Yes</button>
+    <button onclick="handleAnswer(2, 'no')">No</button>
+  </div>
+  <div class="description" id="desc2" style="display:none;"></div>
+
+  <div class="question" id="q3" style="display:none;">3. Is the wiring to the limit switch intact and properly connected?</div>
+  <div class="options" id="opt3" style="display:none;">
+    <button onclick="handleAnswer(3, 'yes')">Yes</button>
+    <button onclick="handleAnswer(3, 'no')">No</button>
+  </div>
+  <div class="description" id="desc3" style="display:none;"></div>
+
+  <div class="question" id="q4" style="display:none;">4. Has the limit switch been tested manually for response?</div>
+  <div class="options" id="opt4" style="display:none;">
+    <button onclick="handleAnswer(4, 'yes')">Yes</button>
+    <button onclick="handleAnswer(4, 'no')">No</button>
+  </div>
+  <div class="description" id="desc4" style="display:none;"></div>
+
+</div>
+
+<a class="back-btn" href="index.html">← Back to Troubleshooting Menu</a>
+
+<script>
+  function handleAnswer(step, answer) {
+    for (let i = step + 1; i <= 4; i++) {
+      document.getElementById("q" + i).style.display = "none";
+      document.getElementById("opt" + i).style.display = "none";
+      document.getElementById("desc" + i).style.display = "none";
+    }
+
+    const desc = document.getElementById("desc" + step);
+    desc.style.display = "block";
+
+    if (step === 1) {
+      if (answer === "yes") {
+        desc.innerHTML = "⚠️ The crane may be stopping due to a prematurely triggered limit switch. Let’s check for physical damage.";
+        document.getElementById("q2").style.display = "block";
+        document.getElementById("opt2").style.display = "block";
+      } else {
+        desc.innerHTML = "✅ Crane moves to full extent. The limit switch appears to function normally unless other symptoms are present.";
+      }
+    }
+
+    if (step === 2) {
+      if (answer === "yes") {
+        desc.innerHTML = "🔧 Realign or replace the actuator/roller if damaged. Misalignment is a common cause of premature stops.";
+      } else {
+        desc.innerHTML = "✅ No visible damage. Let’s inspect electrical connections.";
+        document.getElementById("q3").style.display = "block";
+        document.getElementById("opt3").style.display = "block";
+      }
+    }
+
+    if (step === 3) {
+      if (answer === "yes") {
+        desc.innerHTML = "✅ Wiring is intact. Next, test the switch response manually.";
+        document.getElementById("q4").style.display = "block";
+        document.getElementById("opt4").style.display = "block";
+      } else {
+        desc.innerHTML = "🧰 Loose or damaged wiring may prevent proper switch function. Repair or reconnect wires.";
+      }
+    }
+
+    if (step === 4) {
+      if (answer === "yes") {
+        desc.innerHTML = "✅ Switch responds properly. Problem may be intermittent — monitor and consider sensor calibration.";
+      } else {
+        desc.innerHTML = "⚙️ Replace or adjust the switch if it fails to respond when activated manually.";
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

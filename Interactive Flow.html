@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Power Troubleshooting Flowchart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .simple-flowchart, .detailed-flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .node {
+            border: 2px solid #4a89dc;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f5f7fa;
+            width: 80%;
+            text-align: center;
+        }
+        .node.start-node {
+            background-color: #722ed1;
+            color: white;
+        }
+        .node.question-node {
+            background-color: #e6f7ff;
+            border-color: #1890ff;
+        }
+        .node.solution-node {
+            background-color: #f6ffed;
+            border-color: #52c41a;
+        }
+        .node.warning-node {
+            background-color: #fff2e8;
+            border-color: #fa8c16;
+        }
+        .flow-arrow {
+            font-size: 24px;
+            color: #888;
+        }
+        .branch-container {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+        }
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45%;
+        }
+        .branch-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .options {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn.btn-yes {
+            background-color: #52c41a;
+            color: white;
+        }
+        .btn.btn-no {
+            background-color: #f5222d;
+            color: white;
+        }
+        .btn.btn-maybe {
+            background-color: #fa8c16;
+            color: white;
+        }
+        .btn.btn-action {
+            background-color: #1890ff;
+            color: white;
+        }
+        .btn.back-btn {
+            background-color: #ccc;
+            color: black;
+        }
+        .hidden {
+            display: none;
+        }
+        .path-indicator {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .technical-details {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Computer Power Troubleshooting Flowchart</h1>
+
+    <div id="simpleFlowchart" class="simple-flowchart">
+        <div class="node start-node">
+            <h3>Computer Power Diagnostic</h3>
+            <p>Begin troubleshooting power-related issues</p>
+        </div>
+        
+        <div class="flow-arrow">↓</div>
+        
+        <div class="node question-node">
+            <h3>Does the computer show any signs of power?</h3>
+            <p>Check for LED lights, fan movement, or audible sounds</p>
+        </div>
+        
+        <div class="branch-container">
+            <div class="branch">
+                <div class="branch-label">YES (Has power)</div>
+                <div class="flow-arrow">↓</div>
+                <div class="node question-node">
+                    <h3>Is there display output?</h3>
+                    <p>Check monitor connection and power</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="node solution-node">
+                    <h3>Video Troubleshooting</h3>
+                    <p>1. Check monitor power and connections<br>
+                    2. Test with different cable<br>
+                    3. Try another monitor</p>
+                </div>
+            </div>
+            
+            <div class="branch">
+                <div class="branch-label">NO (No power)</div>
+                <div class="flow-arrow">↓</div>
+                <div class="node question-node">
+                    <h3>Is the power supply receiving electricity?</h3>
+                    <p>Check wall outlet and power cable</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="node solution-node">
+                    <h3>Power Supply Check</h3>
+                    <p>1. Test with different power cable<br>
+                    2. Try different outlet<br>
+                    3. Check PSU switch</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="node warning-node">
+            <h3>Advanced Checks</h3>
+            <p>If basic troubleshooting doesn't resolve the issue:</p>
+            <ul>
+                <li>Test with known-good power supply</li>
+                <li>Check motherboard power connections</li>
+                <li>Inspect for physical damage or burnt components</li>
+            </ul>
+            <button class="btn btn-action" onclick="showDetailedFlow()">Switch to Interactive Diagnostic</button>
+        </div>
+    </div>
+    
+    <div id="detailedFlowchart" class="detailed-flowchart hidden">
+        <div id="startNode" class="node start-node">
+            <h3>Computer Power Diagnostic</h3>
+            <p>Complete interactive troubleshooting guide for power-related issues</p>
+            <button class="btn btn-action" onclick="startFlow()">Begin Diagnostic</button>
+        </div>
+
+        <div id="node1" class="node question-node hidden">
+            <h3>Does the computer show any signs of power?</h3>
+            <p>Check for LED lights, fan movement, or audible sounds when attempting to power on</p>
+            <div class="options">
+                <button class="btn btn-yes" onclick="nextNode('node1-yes')">Yes</button>
+                <button class="btn btn-no" onclick="nextNode('node1-no')">No</button>
+                <button class="btn btn-maybe" onclick="nextNode('node1-maybe')">Intermittent</button>
+            </div>
+            <div class="technical-details">
+                <strong>Technical Note:</strong> Some systems may have lights but no fan movement, or vice versa.
+            </div>
+        </div>
+
+        <div id="node1-yes" class="node question-node hidden">
+            <h3>Is there display output on your monitor?</h3>
+            <p>Check if you see anything on screen (BIOS, OS loading, etc.)</p>
+            <div class="options">
+                <button class="btn btn-yes" onclick="nextNode('node1-yes-yes')">Yes</button>
+                <button class="btn btn-no" onclick="nextNode('node1-yes-no')">No</button>
+            </div>
+            <div class="path-indicator">Path: System has power →</div>
+        </div>
+
+        <div id="node1-yes-yes" class="node question-node hidden">
+            <h3>Does the system boot completely to the operating system?</h3>
+            <p>Check if the boot process completes successfully</p>
+            <div class="options">
+                <button class="btn btn-yes" onclick="nextNode('node1-yes-yes-yes')">Yes</button>
+                <button class="btn btn-no" onclick="nextNode('node1-yes-yes-no')">No</button>
+                <button class="btn btn-maybe" onclick="nextNode('node1-yes-yes-maybe')">Sometimes</button>
+            </div>
+            <div class="path-indicator">Path: System has power → Display works →</div>
+        </div>
+
+        <div id="node1-yes-yes-yes" class="node solution-node hidden">
+            <h3>System appears to be working normally</h3>
+            <p>If you're experiencing intermittent issues, consider these checks:</p>
+            <ol>
+                <li>Monitor system temperatures</li>
+                <li>Check for loose connections</li>
+                <li>Test with different power outlet</li>
+            </ol>
+            <div class="technical-details">
+                <strong>Note:</strong> Some power issues may be related to overheating or unstable power supply.
+            </div>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: System has power → Display works → Boots completely</div>
+        </div>
+
+        <div id="node1-no" class="node question-node hidden">
+            <h3>Is the power supply receiving electricity?</h3>
+            <p>Check these potential issues:</p>
+            <ul>
+                <li>Is the power cable properly connected?</li>
+                <li>Is the wall outlet working?</li>
+                <li>Is the PSU switch turned on?</li>
+            </ul>
+            <div class="options">
+                <button class="btn btn-yes" onclick="nextNode('node1-no-yes')">Yes</button>
+                <button class="btn btn-no" onclick="nextNode('node1-no-no')">No</button>
+            </div>
+            <div class="path-indicator">Path: No power →</div>
+        </div>
+
+        <div id="node1-no-no" class="node solution-node hidden">
+            <h3>Power Supply Not Receiving Electricity</h3>
+            <p>Try these solutions:</p>
+            <ol>
+                <li>Test with a different power cable</li>
+                <li>Try a different wall outlet</li>
+                <li>Check circuit breakers/power strips</li>
+                <li>Test the outlet with another device</li>
+            </ol>
+            <div class="technical-details">
+                <strong>Advanced Check:</strong> Use a multimeter to verify outlet voltage (should be ~120V or ~240V depending on region).
+            </div>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: No power → PSU not receiving electricity</div>
+        </div>
+
+        <div id="node1-maybe" class="node question-node hidden">
+            <h3>Describe the intermittent power behavior:</h3>
+            <p>Select the closest match to your situation</p>
+            <div class="options">
+                <button class="btn" onclick="nextNode('node1-maybe-1')">Turns on but shuts off randomly</button>
+                <button class="btn" onclick="nextNode('node1-maybe-2')">Sometimes doesn't turn on</button>
+                <button class="btn" onclick="nextNode('node1-maybe-3')">Reboots unexpectedly</button>
+            </div>
+            <div class="path-indicator">Path: Intermittent power issues →</div>
+        </div>
+
+        <div id="node1-maybe-1" class="node question-node hidden">
+            <h3>System shuts off randomly</h3>
+            <p>Possible causes:</p>
+            <ul>
+                <li>Overheating</li>
+                <li>Power supply failure</li>
+                <li>Motherboard issues</li>
+            </ul>
+            <div class="options">
+                <button class="btn" onclick="nextNode('node1-maybe-1a')">Check temperatures</button>
+                <button class="btn" onclick="nextNode('node1-maybe-1b')">Test with different PSU</button>
+            </div>
+            <div class="path-indicator">Path: Intermittent → Random shutdowns</div>
+        </div>
+
+        <div id="node1-maybe-1a" class="node solution-node hidden">
+            <h3>Check System Temperatures</h3>
+            <p>Use BIOS or software tools to monitor CPU, GPU, and system temperatures.</p>
+            <p>Clean dust from fans and heatsinks.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: Intermittent → Random shutdowns → Check temperatures</div>
+        </div>
+
+        <div id="node1-maybe-1b" class="node solution-node hidden">
+            <h3>Test with Different Power Supply</h3>
+            <p>If possible, test with a known good PSU of adequate wattage.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: Intermittent → Random shutdowns → Test PSU</div>
+        </div>
+
+         <div id="node1-maybe-2" class="node solution-node hidden">
+            <h3>Intermittent Power On</h3>
+            <p>Check power connections and try different power source.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: Intermittent → Sometimes doesn't turn on</div>
+        </div>
+
+         <div id="node1-maybe-3" class="node solution-node hidden">
+            <h3>Unexpected Reboots</h3>
+            <p>Check for driver issues, software conflicts, and RAM problems.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: Intermittent → Unexpected reboots</div>
+        </div>
+
+        <div id="node1-yes-no" class="node solution-node hidden">
+            <h3>Check Video Connections</h3>
+            <p>Ensure monitor cable is properly connected, test with another cable if available.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: System has power → No display</div>
+        </div>
+
+        <div id="node1-yes-yes-no" class="node solution-node hidden">
+            <h3>Boot Process Failure</h3>
+            <p>Check boot order in BIOS, test hard drive, try reinstalling OS.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: System has power → Display works → Boot failure</div>
+        </div>
+
+        <div id="node1-yes-yes-maybe" class="node solution-node hidden">
+            <h3>Inconsistent Booting</h3>
+            <p>Check hard drive health, test RAM, and check for loose connections.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: System has power → Display works → Inconsistent boot</div>
+        </div>
+
+        <div id="node1-no-yes" class="node solution-node hidden">
+            <h3>Power Supply Receiving Electricity</h3>
+            <p>Proceed to motherboard or PSU troubleshooting.</p>
+            <button class="btn btn-action" onclick="restartFlow()">Restart Diagnostic</button>
+            <button class="btn back-btn" onclick="prevNode()">Back</button>
+            <div class="path-indicator">Path: No power → PSU receiving electricity</div>
+        </div>
+    </div>
+
+    <script>
+        function showDetailedFlow() {
+            document.getElementById('simpleFlowchart').classList.add('hidden');
+            document.getElementById('detailedFlowchart').classList.remove('hidden');
+        }
+
+        function startFlow() {
+            document.getElementById('startNode').classList.add('hidden');
+            document.getElementById('node1').classList.remove('hidden');
+        }
+
+        function nextNode(nodeId) {
+            const nextElement = document.getElementById(nodeId);
+            if (!nextElement) {
+                console.error('Node not found:', nodeId);
+                alert('Troubleshooting path not fully implemented yet.');
+                restartFlow();
+                return;
+            }
+            document.querySelectorAll('.node').forEach(node => {
+                node.classList.add('hidden');
+            });
+            nextElement.classList.remove('hidden');
+            nextElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        }
+
+        function restartFlow() {
+            document.querySelectorAll('.node').forEach(node => {
+                node.classList.add('hidden');
+            });
+            document.getElementById('startNode').classList.remove('hidden');
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function prevNode() {
+            const currentElement = document.querySelector('.node:not(.hidden)');
+            const prevElementId = currentElement.id.substring(0, currentElement.id.lastIndexOf('-'));
+            const prevElement = document.getElementById(prevElementId);
+            if (prevElement) {
+                document.querySelectorAll('.node').forEach(node => {
+                    node.classList.add('hidden');
+                });
+                prevElement.classList.remove('hidden');
+                prevElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        }
+    </script>
+</body>
+</html>

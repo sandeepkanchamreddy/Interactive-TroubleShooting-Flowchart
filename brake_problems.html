@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Brake Problems - Troubleshooting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h2 {
+      color: #cc0000;
+    }
+    .question {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .options {
+      margin-top: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 22px;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #0077cc;
+      color: white;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .description {
+      background-color: #e8f0fe;
+      margin-top: 15px;
+      padding: 15px;
+      border-left: 5px solid #0077cc;
+      font-size: 16px;
+    }
+    .back-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #6c757d;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<h2>🛑 Brake Problems - Troubleshooting</h2>
+
+<div id="troubleshooting">
+
+  <div class="question" id="q1">1. Is the crane failing to stop correctly or drifting after movement?</div>
+  <div class="options" id="opt1">
+    <button onclick="handleAnswer(1, 'yes')">Yes</button>
+    <button onclick="handleAnswer(1, 'no')">No</button>
+  </div>
+  <div class="description" id="desc1" style="display:none;"></div>
+
+  <div class="question" id="q2" style="display:none;">2. Is the brake coil receiving power when energized?</div>
+  <div class="options" id="opt2" style="display:none;">
+    <button onclick="handleAnswer(2, 'yes')">Yes</button>
+    <button onclick="handleAnswer(2, 'no')">No</button>
+  </div>
+  <div class="description" id="desc2" style="display:none;"></div>
+
+  <div class="question" id="q3" style="display:none;">3. Is there excessive wear or misalignment in the brake pads?</div>
+  <div class="options" id="opt3" style="display:none;">
+    <button onclick="handleAnswer(3, 'yes')">Yes</button>
+    <button onclick="handleAnswer(3, 'no')">No</button>
+  </div>
+  <div class="description" id="desc3" style="display:none;"></div>
+
+  <div class="question" id="q4" style="display:none;">4. Has the spring mechanism or actuator been inspected for damage?</div>
+  <div class="options" id="opt4" style="display:none;">
+    <button onclick="handleAnswer(4, 'yes')">Yes</button>
+    <button onclick="handleAnswer(4, 'no')">No</button>
+  </div>
+  <div class="description" id="desc4" style="display:none;"></div>
+
+</div>
+
+<a class="back-btn" href="index.html">← Back to Troubleshooting Menu</a>
+
+<script>
+  function handleAnswer(step, answer) {
+    for (let i = step + 1; i <= 4; i++) {
+      document.getElementById("q" + i).style.display = "none";
+      document.getElementById("opt" + i).style.display = "none";
+      document.getElementById("desc" + i).style.display = "none";
+    }
+
+    const desc = document.getElementById("desc" + step);
+    desc.style.display = "block";
+
+    if (step === 1) {
+      if (answer === "yes") {
+        desc.innerHTML = "⚠️ Brake may not be engaging properly. Let’s check brake coil power.";
+        document.getElementById("q2").style.display = "block";
+        document.getElementById("opt2").style.display = "block";
+      } else {
+        desc.innerHTML = "✅ No stopping issue detected. Brake appears to function correctly.";
+      }
+    }
+
+    if (step === 2) {
+      if (answer === "yes") {
+        desc.innerHTML = "✅ Coil is energized. Let’s inspect for mechanical wear or misalignment.";
+        document.getElementById("q3").style.display = "block";
+        document.getElementById("opt3").style.display = "block";
+      } else {
+        desc.innerHTML = "🔌 Check fuse, relay, or controller output to the brake coil.";
+      }
+    }
+
+    if (step === 3) {
+      if (answer === "yes") {
+        desc.innerHTML = "🧰 Replace worn pads or realign brake components as needed.";
+      } else {
+        desc.innerHTML = "✅ No wear found. Let's examine the spring or actuator mechanism.";
+        document.getElementById("q4").style.display = "block";
+        document.getElementById("opt4").style.display = "block";
+      }
+    }
+
+    if (step === 4) {
+      if (answer === "yes") {
+        desc.innerHTML = "🔧 Repair or replace any faulty spring or damaged actuator parts.";
+      } else {
+        desc.innerHTML = "📋 All components appear normal. Recommend system test and full brake calibration.";
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
